@@ -34,34 +34,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<div class="row justify-content-center align-items-center" style="min-height: 60vh;">
-    <div class="col-md-5 col-lg-4">
-        <div class="card shadow-lg border-0">
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm border-0 rounded-4">
             <div class="card-body p-5">
                 <div class="text-center mb-4">
-                    <i class="bi bi-tools text-cit-primary" style="font-size: 3rem;"></i>
-                    <h3 class="fw-bold text-cit-primary mt-2">Welcome Back</h3>
+                    <div class="bg-cit-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 64px; height: 64px;">
+                        <i class="bi bi-person-bounding-box fs-2"></i>
+                    </div>
+                    <h3 class="fw-bold text-dark mb-1">Welcome Back</h3>
+                    <p class="text-muted small">Sign in to continue to CIT Fix It</p>
                 </div>
 
                 <?php if($error): ?>
-                    <div class="alert alert-danger py-2 small rounded-3"><?= $error ?></div>
+                    <div class="alert alert-danger py-2 small rounded-3 border-0 bg-danger-subtle text-danger text-center fw-medium">
+                        <i class="bi bi-exclamation-circle me-1"></i><?= $error ?>
+                    </div>
                 <?php endif; ?>
 
                 <form method="POST">
                     <div class="form-floating mb-3">
-                        <input type="text" name="login_input" class="form-control" id="floatingInput" placeholder="User or Email" required>
-                        <label for="floatingInput">Username or Email</label>
+                        <input type="text" name="login_input" class="form-control bg-light border-0" id="floatingInput" placeholder="User or Email" required>
+                        <label for="floatingInput" class="text-muted">Username or Email</label>
                     </div>
                     <div class="form-floating mb-4">
-                        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
-                        <label for="floatingPassword">Password</label>
+                        <input type="password" name="password" class="form-control bg-light border-0" id="floatingPassword" placeholder="Password" required>
+                        <label for="floatingPassword" class="text-muted">Password</label>
                     </div>
-                    <button type="submit" class="btn btn-cit w-100 py-3 fw-bold rounded-3">Sign In</button>
+                    <button type="submit" class="btn btn-cit w-100 py-2 fs-5 fw-bold rounded-3 shadow-sm">Sign In</button>
                 </form>
 
-                <div class="text-center mt-4">
+                <div class="text-center mt-4 pt-3 border-top">
                     <span class="text-muted small">New here?</span>
-                    <a href="register.php" class="text-cit-primary fw-bold text-decoration-none">Create Account</a>
+                    <a href="register.php" class="text-cit-primary fw-semibold text-decoration-none">Create an Account</a>
                 </div>
             </div>
         </div>

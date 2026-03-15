@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
             if ($stmt->execute([$username, $email, password_hash($pass, PASSWORD_DEFAULT)])) {
-                $success = "Registration Successful! You can now <a href='login.php' class='fw-bold'>Login here</a>.";
+                $success = "Registration Successful! You can now <a href='login.php' class='fw-bold text-success text-decoration-underline'>Login here</a>.";
             } else {
                 $error = "Database error.";
             }
@@ -41,40 +41,62 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
-    <div class="col-md-6 col-lg-5">
-        <div class="card shadow-lg border-0">
+    <div class="col-md-8 col-lg-5">
+        <div class="card shadow-sm border-0 rounded-4">
             <div class="card-body p-5">
-                <h3 class="fw-bold text-cit-primary text-center mb-4">Create Account</h3>
+                <div class="text-center mb-4">
+                    <div class="bg-cit-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 64px; height: 64px;">
+                        <i class="bi bi-person-plus fs-2"></i>
+                    </div>
+                    <h3 class="fw-bold text-dark mb-1">Create Account</h3>
+                    <p class="text-muted small">Join the CIT Fix It portal</p>
+                </div>
 
                 <?php if($error): ?>
-                    <div class="alert alert-danger py-2 small"><?= $error ?></div>
+                    <div class="alert alert-danger py-2 small rounded-3 border-0 bg-danger-subtle text-danger text-center fw-medium">
+                        <i class="bi bi-exclamation-circle me-1"></i><?= $error ?>
+                    </div>
                 <?php endif; ?>
                 
                 <?php if($success): ?>
-                    <div class="alert alert-success py-3 text-center"><?= $success ?></div>
+                    <div class="alert alert-success py-3 text-center rounded-3 border-0 bg-success-subtle text-success fw-medium">
+                        <i class="bi bi-check-circle-fill me-2 fs-4 d-block mb-2"></i>
+                        <?= $success ?>
+                    </div>
                 <?php else: ?>
 
                 <form method="POST">
-                    <div class="mb-3">
-                        <label class="form-label small text-muted">Username</label>
-                        <input type="text" name="username" class="form-control" required>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="username" class="form-control bg-light border-0" id="regUsername" placeholder="Username" required>
+                        <label for="regUsername" class="text-muted">Username</label>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small text-muted">Email (@email.kmutnb.ac.th)</label>
-                        <input type="email" name="email" class="form-control" required>
+                    <div class="form-floating mb-3">
+                        <input type="email" name="email" class="form-control bg-light border-0" id="regEmail" placeholder="Email" required>
+                        <label for="regEmail" class="text-muted">Email (@email.kmutnb.ac.th)</label>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label small text-muted">Password</label>
-                            <input type="password" name="password" class="form-control" required>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="password" name="password" class="form-control bg-light border-0" id="regPass" placeholder="Password" required>
+                                <label for="regPass" class="text-muted">Password</label>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                            <label class="form-label small text-muted">Confirm Password</label>
-                            <input type="password" name="confirm_password" class="form-control" required>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="password" name="confirm_password" class="form-control bg-light border-0" id="regPass2" placeholder="Confirm Password" required>
+                                <label for="regPass2" class="text-muted">Confirm Password</label>
+                            </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-cit w-100 py-3 fw-bold rounded-3">Register</button>
+                    <button type="submit" class="btn btn-cit w-100 py-2 fs-5 fw-bold rounded-3 shadow-sm">Register</button>
                 </form>
+                <?php endif; ?>
+
+                <?php if(!$success): ?>
+                <div class="text-center mt-4 pt-3 border-top">
+                    <span class="text-muted small">Already have an account?</span>
+                    <a href="login.php" class="text-cit-primary fw-semibold text-decoration-none">Sign In</a>
+                </div>
                 <?php endif; ?>
             </div>
         </div>

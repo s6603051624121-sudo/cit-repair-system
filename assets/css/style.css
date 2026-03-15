@@ -1,113 +1,133 @@
 /* assets/css/style.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --cit-primary: #222263;      /* Your requested color */
-    --cit-secondary: #4a4a8a;    /* A lighter shade for hover states */
-    --cit-light: #f4f6f9;        /* Light background for the page */
-    --cit-dark: #1a1a40;
+    /* Modern SaaS Palette (Indigo & Slate) */
+    --cit-primary: #4f46e5;      /* Vibrant Indigo */
+    --cit-primary-hover: #4338ca;
+    --cit-bg: #f8fafc;           /* Very light slate/gray */
+    --cit-text-main: #1e293b;
+    --cit-text-muted: #64748b;
+    --cit-surface: #ffffff;
+    --cit-border: #e2e8f0;
 }
 
 body {
-    background-color: var(--cit-light);
+    background-color: var(--cit-bg);
     font-family: 'Inter', sans-serif;
-    color: #444;
+    color: var(--cit-text-main);
+    -webkit-font-smoothing: antialiased;
 }
 
-/* --- Brand Utilities --- */
-.bg-cit-primary { background-color: var(--cit-primary) !important; color: white; }
-.text-cit-primary { color: var(--cit-primary) !important; }
+/* --- Page Entrance Animation --- */
+.page-transition {
+    animation: fadeUpIn 0.5s ease-out forwards;
+}
 
+@keyframes fadeUpIn {
+    0% { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Typography & Colors --- */
+.text-cit-primary { color: var(--cit-primary) !important; }
+.bg-cit-primary { background-color: var(--cit-primary) !important; color: white; }
+
+/* --- Buttons --- */
 .btn-cit {
     background-color: var(--cit-primary);
     color: white;
     border: none;
-    padding: 10px 20px;
-    transition: all 0.3s ease;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
 }
 
 .btn-cit:hover {
-    background-color: var(--cit-secondary);
+    background-color: var(--cit-primary-hover);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
 }
 
-/* --- Navbar --- */
+/* --- Floating Glass Navbar --- */
 .navbar-custom {
-    background-color: var(--cit-primary);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    padding: 0.75rem 0;
 }
-.nav-link { color: rgba(255,255,255,0.8) !important; transition: color 0.2s; }
-.nav-link:hover { color: #fff !important; }
 
-/* --- Cards --- */
+.navbar-brand {
+    color: var(--cit-text-main) !important;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.nav-link { 
+    color: var(--cit-text-muted) !important; 
+    font-weight: 500;
+    transition: all 0.2s ease; 
+    border-radius: 6px;
+    padding: 0.5rem 1rem !important;
+}
+
+.nav-link:hover, .nav-link.active { 
+    color: var(--cit-primary) !important; 
+    background-color: rgba(79, 70, 229, 0.05);
+}
+
+/* --- Cards & Containers --- */
 .card {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: var(--cit-surface);
+    border: 1px solid var(--cit-border);
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
 }
 
-/* Status Strips for Kanban Cards */
-.status-strip { height: 6px; width: 100%; }
-.status-pending { background-color: #ffc107; }
-.status-material { background-color: #dc3545; }
-.status-fixing { background-color: #0d6efd; }
-.status-complete { background-color: #198754; }
-
-/* Hover effect for cards */
+/* Smooth hover effect for actionable cards */
 .hover-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.02);
+    border-color: rgba(79, 70, 229, 0.2);
 }
 
-/* --- Form Elements --- */
-.form-control {
-    border-radius: 8px;
-    padding: 12px;
-    border: 1px solid #dee2e6;
+/* Form Inputs */
+.form-control, .form-select {
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--cit-border);
+    background-color: #fcfcfd;
+    transition: all 0.2s;
 }
-.form-control:focus {
+
+.form-control:focus, .form-select:focus {
+    background-color: white;
     border-color: var(--cit-primary);
-    box-shadow: 0 0 0 0.2rem rgba(34, 34, 99, 0.25);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
 }
 
-/* --- Mobile Navbar Enhancements --- */
+/* Status Strips for Kanban Cards */
+.status-strip { height: 4px; width: 100%; }
+.status-pending { background-color: #f59e0b; }
+.status-material { background-color: #ef4444; }
+.status-fixing { background-color: #3b82f6; }
+.status-complete { background-color: #10b981; }
+
+/* Mobile Tweaks */
 @media (max-width: 991px) {
     .navbar-collapse {
-        background-color: var(--cit-primary); /* Match header color */
-        border-top: 1px solid rgba(255,255,255,0.1);
-        padding-bottom: 15px;
-    }
-    
-    /* Mobile User Profile Section */
-    .mobile-user-header {
-        background-color: rgba(0, 0, 0, 0.2);
-        padding: 15px;
-        margin-bottom: 10px;
-        border-radius: 0 0 12px 12px;
-    }
-
-    /* Mobile Links */
-    .navbar-nav .nav-link {
-        padding: 10px 20px;
-        border-radius: 8px;
-        color: rgba(255,255,255,0.9) !important;
-    }
-    .navbar-nav .nav-link:hover, 
-    .navbar-nav .nav-link.active {
-        background-color: rgba(255,255,255,0.1);
-        color: white !important;
-        transform: translateX(5px); /* Slide effect */
-    }
-    
-    /* Full width buttons on mobile */
-    .nav-item .btn {
-        display: block;
-        width: 100%;
-        margin-top: 10px;
-        text-align: center;
+        background: white;
+        border-radius: 12px;
+        padding: 1rem;
+        margin-top: 1rem;
+        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        border: 1px solid var(--cit-border);
     }
 }

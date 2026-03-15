@@ -17,36 +17,38 @@ $current_page = basename($_SERVER['PHP_SELF']);
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top z-3">
   <div class="container">
-    <a class="navbar-brand fw-bold text-white d-flex align-items-center" href="index.php">
-        <i class="bi bi-tools me-2 fs-4"></i>
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.php">
+        <div class="bg-cit-primary text-white rounded p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+            <i class="bi bi-tools fs-5"></i>
+        </div>
         <span>CIT Fix It</span>
     </a>
 
-    <button class="navbar-toggler border-0 text-white focus-ring focus-ring-light" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-        <i class="bi bi-list fs-1"></i>
+    <button class="navbar-toggler border-0 focus-ring focus-ring-light" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <i class="bi bi-list fs-1 text-dark"></i>
     </button>
     
     <div class="collapse navbar-collapse" id="navContent">
       
       <?php if(isset($_SESSION['user_id'])): ?>
-        <div class="mobile-user-header d-lg-none d-flex align-items-center mb-3">
-            <div class="bg-white text-primary rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 45px; height: 45px; font-weight: bold; font-size: 1.2rem;">
+        <div class="d-lg-none d-flex align-items-center mb-3 p-2 bg-light rounded-3 border">
+            <div class="bg-cit-primary text-white rounded-circle d-flex justify-content-center align-items-center me-3 shadow-sm" style="width: 45px; height: 45px; font-weight: 600; font-size: 1.2rem;">
                 <?= strtoupper(substr($_SESSION['username'], 0, 1)) ?>
             </div>
             <div>
-                <div class="text-white fw-bold"><?= htmlspecialchars($_SESSION['username']) ?></div>
-                <div class="text-white-50 small"><?= ucfirst($_SESSION['role']) ?> Account</div>
+                <div class="text-dark fw-bold"><?= htmlspecialchars($_SESSION['username']) ?></div>
+                <div class="text-muted small"><?= ucfirst($_SESSION['role']) ?> Account</div>
             </div>
         </div>
       <?php endif; ?>
 
-      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
         <?php if(isset($_SESSION['user_id'])): ?>
             
-            <li class="nav-item text-white-50 d-none d-lg-block small">
-                Hello, <span class="text-white fw-bold"><?= htmlspecialchars($_SESSION['username']) ?></span>
+            <li class="nav-item d-none d-lg-block me-3">
+                <span class="text-muted small">Hello, <span class="fw-bold text-dark"><?= htmlspecialchars($_SESSION['username']) ?></span></span>
             </li>
 
             <?php if($_SESSION['role'] == 'user'): ?>
@@ -88,19 +90,19 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 </li>
             <?php endif; ?>
 
-            <li class="nav-item mt-3 mt-lg-0">
-                <a class="btn btn-danger btn-sm rounded-pill px-4 fw-bold shadow-sm w-100 w-lg-auto" href="logout.php">
-                    <i class="bi bi-box-arrow-right me-2"></i>Logout
+            <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                <a class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-medium w-100 w-lg-auto" href="logout.php">
+                    Logout
                 </a>
             </li>
 
         <?php else: ?>
-            <li class="nav-item"><a href="login.php" class="btn btn-outline-light rounded-pill px-4 me-2 w-100 w-lg-auto mb-2 mb-lg-0">Login</a></li>
-            <li class="nav-item"><a href="register.php" class="btn btn-light rounded-pill px-4 text-primary fw-bold w-100 w-lg-auto">Register</a></li>
+            <li class="nav-item"><a href="login.php" class="btn btn-light border rounded-pill px-4 me-2 w-100 w-lg-auto mb-2 mb-lg-0 fw-medium">Login</a></li>
+            <li class="nav-item"><a href="register.php" class="btn btn-cit rounded-pill px-4 fw-medium w-100 w-lg-auto">Register</a></li>
         <?php endif; ?>
       </ul>
     </div>
   </div>
 </nav>
 
-<div class="container py-4 flex-grow-1">
+<div class="container py-5 flex-grow-1 page-transition">
