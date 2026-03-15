@@ -1,0 +1,113 @@
+/* assets/css/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --cit-primary: #222263;      /* Your requested color */
+    --cit-secondary: #4a4a8a;    /* A lighter shade for hover states */
+    --cit-light: #f4f6f9;        /* Light background for the page */
+    --cit-dark: #1a1a40;
+}
+
+body {
+    background-color: var(--cit-light);
+    font-family: 'Inter', sans-serif;
+    color: #444;
+}
+
+/* --- Brand Utilities --- */
+.bg-cit-primary { background-color: var(--cit-primary) !important; color: white; }
+.text-cit-primary { color: var(--cit-primary) !important; }
+
+.btn-cit {
+    background-color: var(--cit-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-cit:hover {
+    background-color: var(--cit-secondary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* --- Navbar --- */
+.navbar-custom {
+    background-color: var(--cit-primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.nav-link { color: rgba(255,255,255,0.8) !important; transition: color 0.2s; }
+.nav-link:hover { color: #fff !important; }
+
+/* --- Cards --- */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+/* Status Strips for Kanban Cards */
+.status-strip { height: 6px; width: 100%; }
+.status-pending { background-color: #ffc107; }
+.status-material { background-color: #dc3545; }
+.status-fixing { background-color: #0d6efd; }
+.status-complete { background-color: #198754; }
+
+/* Hover effect for cards */
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* --- Form Elements --- */
+.form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #dee2e6;
+}
+.form-control:focus {
+    border-color: var(--cit-primary);
+    box-shadow: 0 0 0 0.2rem rgba(34, 34, 99, 0.25);
+}
+
+/* --- Mobile Navbar Enhancements --- */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: var(--cit-primary); /* Match header color */
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 15px;
+    }
+    
+    /* Mobile User Profile Section */
+    .mobile-user-header {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    /* Mobile Links */
+    .navbar-nav .nav-link {
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: rgba(255,255,255,0.9) !important;
+    }
+    .navbar-nav .nav-link:hover, 
+    .navbar-nav .nav-link.active {
+        background-color: rgba(255,255,255,0.1);
+        color: white !important;
+        transform: translateX(5px); /* Slide effect */
+    }
+    
+    /* Full width buttons on mobile */
+    .nav-item .btn {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+}

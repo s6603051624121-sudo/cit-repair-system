@@ -1,0 +1,40 @@
+CREATE DATABASE IF NOT EXISTS cit_fixit;
+USE cit_fixit;
+
+-- Users Table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('user', 'technician', 'admin') DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Repair Tickets Table
+CREATE TABLE tickets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    technician_id INT DEFAULT NULL,
+    room_number VARCHAR(20) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    details TEXT NOT NULL,
+    status ENUM('pending', 'waiting_material', 'fixing', 'complete') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    user_image VARCHAR(255) DEFAULT NULL, -- Image uploaded by user
+    tech_proof_image VARCHAR(255) DEFAULT NULL, -- Proof uploaded by tech
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (technician_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- Create a default Admin (Password: admin123)
+-- Note: In production, manually register then change role in DB
+INSERT INTO users (username, email, password, role) 
+VALUES ('SuperAdmin', 'admin@email.kmutnb.ac.th', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+
+-- 1. Make username unique (for the register/login fix)
+ALTER TABLE users ADD UNIQUE (username);
+
+-- 2. Add a column to ban users (0 = Active, 1 = Banned)
+ALTER TABLE users ADD COLUMN is_banned TINYINT DEFAULT 0;
